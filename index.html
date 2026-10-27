@@ -1,0 +1,400 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مفاجأة دكتورة ساره 💜 | دكتور إبراهيم</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Google Fonts Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Cairo', sans-serif; }
+        .bg-deep-purple { background-color: #07030d; }
+        .glow-purple-strong { box-shadow: 0 0 50px rgba(168, 85, 247, 0.6); }
+        .text-glow-max { text-shadow: 0 0 20px rgba(233, 213, 255, 1), 0 0 10px rgba(168, 85, 247, 0.9); }
+        .glass-card-deep { background: rgba(15, 5, 30, 0.92); backdrop-filter: blur(15px); border: 1px solid rgba(168, 85, 247, 0.5); }
+        #mainContent { display: none; }
+        #secretMessage { transition: opacity 0.3s ease-in-out; }
+    </style>
+</head>
+<body class="bg-deep-purple text-purple-100 min-h-screen selection:bg-purple-500 selection:text-white overflow-x-hidden">
+
+    <!-- 1. صفحة الدخول (Gate) -->
+    <div id="loginGate" class="fixed inset-0 z-50 flex items-center justify-center bg-deep-purple p-4">
+        <div class="glass-card-deep p-8 md:p-12 rounded-3xl glow-purple-strong text-center max-w-md w-full border border-purple-700">
+            <div class="mb-8 flex justify-center">
+                <div class="w-20 h-20 rounded-full bg-purple-950 flex items-center justify-center border-4 border-purple-500 glow-purple-strong">
+                    <i class="fa-solid fa-lock fa-3x text-purple-200 text-glow-max"></i>
+                </div>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-black text-white text-glow-max mb-3">أهلاً يا دكتورة</h2>
+            <p class="text-purple-200 mb-10">اكتبي كلمة المرور للوصول إلى المفاجأة 🩺💜</p>
+            
+            <div class="relative">
+                <input type="password" id="passInput" maxlength="8" class="w-full bg-purple-900/50 border border-purple-600 text-white text-center text-2xl p-4 rounded-2xl focus:ring-2 focus:ring-purple-400 focus:border-purple-400 transition tracking-widest" inputmode="numeric">
+                <span onclick="togglePassVisibility()" class="absolute left-4 top-1/2 -translate-y-1/2 cursor-pointer text-purple-300 hover:text-white">
+                    <i id="eyeIcon" class="fa-solid fa-eye"></i>
+                </span>
+            </div>
+            <p id="errorMsg" class="text-red-400 text-sm mt-3 h-5 opacity-0 transition-opacity">كلمة المرور غير صحيحة!</p>
+
+            <button onclick="checkPassword()" class="w-full mt-8 bg-gradient-to-r from-purple-600 to-fuchsia-600 hover:from-purple-500 hover:to-fuchsia-500 text-white font-bold py-4 px-6 rounded-2xl shadow-lg transition transform hover:-translate-y-1 text-lg cursor-pointer">
+                افتحي المفاجأة 🚀
+            </button>
+        </div>
+    </div>
+
+    <!-- 2. المحتوى الرئيسي -->
+    <div id="mainContent">
+        <!-- مشغل الموسيقى العائم (الأغنية الرئيسية) -->
+        <div class="fixed bottom-6 left-6 z-40">
+            <audio id="loveSong" loop>
+                <source src="song.mp3" type="audio/mp3">
+            </audio>
+            <button onclick="toggleMusic()" id="musicBtn" class="flex items-center gap-3 bg-purple-700 hover:bg-purple-600 text-white px-5 py-3.5 rounded-full shadow-2xl glow-purple-strong transition transform hover:scale-105 cursor-pointer border border-purple-400">
+                <i id="musicIcon" class="fa-solid fa-music animate-spin"></i>
+                <span id="musicText" class="text-sm font-bold">إيقاف الأغنية</span>
+            </button>
+        </div>
+
+        <!-- الهيدر الرئيسي -->
+        <header class="relative py-24 px-4 text-center overflow-hidden bg-gradient-to-b from-purple-950/80 to-deep-purple">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(168,85,247,0.4)_0,transparent_70%)] pointer-events-none"></div>
+            <div class="max-w-3xl mx-auto relative z-10">
+                <span class="inline-block bg-purple-900/90 text-purple-200 px-6 py-2.5 rounded-full text-base font-bold mb-6 border border-purple-400 shadow-lg">
+                    <i class="fa-solid fa-tooth text-purple-300 ml-2"></i> دكاترة القلوب والأسنان 🩺
+                </span>
+                
+                <h1 class="text-5xl md:text-7xl font-black tracking-tight mb-6 text-white text-glow-max">
+                    إبراهيم <span class="text-fuchsia-400">&</span> ساره
+                </h1>
+                
+                <p class="text-xl md:text-2xl text-purple-100 font-semibold mb-10 text-glow-max">
+                    "إنتِ أول كل حاجة.. وأجمل ابتسامة في حياتي كلها" 💜
+                </p>
+
+                <!-- عداد الحب -->
+                <div class="glass-card-deep p-6 rounded-3xl glow-purple-strong max-w-xl mx-auto grid grid-cols-4 gap-4 text-center border-purple-500">
+                    <div>
+                        <span id="days" class="text-3xl md:text-5xl font-black text-white text-glow-max">0</span>
+                        <p class="text-xs text-purple-300 font-bold mt-1">يوم</p>
+                    </div>
+                    <div>
+                        <span id="hours" class="text-3xl md:text-5xl font-black text-white text-glow-max">0</span>
+                        <p class="text-xs text-purple-300 font-bold mt-1">ساعة</p>
+                    </div>
+                    <div>
+                        <span id="minutes" class="text-3xl md:text-5xl font-black text-white text-glow-max">0</span>
+                        <p class="text-xs text-purple-300 font-bold mt-1">دقيقة</p>
+                    </div>
+                    <div>
+                        <span id="seconds" class="text-3xl md:text-5xl font-black text-white text-glow-max">0</span>
+                        <p class="text-xs text-purple-300 font-bold mt-1">ثانية</p>
+                    </div>
+                </div>
+                <p class="text-xs text-purple-300 font-medium mt-4">نبضات قلبنا معاً منذ 17 أكتوبر 2024 ✨</p>
+            </div>
+        </header>
+
+        <!-- روشتة الحب الطبية -->
+        <section class="py-12 px-4 max-w-3xl mx-auto">
+            <div class="glass-card-deep p-8 rounded-3xl glow-purple-strong border-purple-500 relative overflow-hidden">
+                <div class="absolute top-0 right-0 bg-fuchsia-600 text-white text-xs px-5 py-1.5 rounded-bl-2xl font-bold shadow-md">روشتة حب معتمدة 🩺</div>
+                <div class="text-center mb-6">
+                    <h3 class="text-2xl font-black text-white text-glow-max"><i class="fa-solid fa-prescription text-fuchsia-400 ml-2"></i> عيادة القلوب والأسنان</h3>
+                    <p class="text-xs text-purple-200 mt-1 font-semibold">الدكتور المعالج: إبراهيم | المريضة المحبوبة: ساره</p>
+                </div>
+                <div class="space-y-3 text-purple-100 text-sm md:text-base border-t border-b border-purple-700/80 py-5 my-4">
+                    <p><strong>تشخيص الحالة:</strong> إدمان ضحكتك، ووقوع القلب في حب عيونك بلا استئذان 💜</p>
+                    <p><strong>العلاج المقترح:</strong> سماع صوتك وحديثك اليومي بانتظام شديد.</p>
+                    <p><strong>الجرعة:</strong> حب بلا حدود ولا توقف مدى الحياة (بدون أي آثار جانبية).</p>
+                </div>
+                <div class="flex justify-between items-center text-xs text-purple-300 font-bold">
+                    <span>تاريخ الإصدار: مستمر للأبد ✨</span>
+                    <span class="text-white">التوقيع: د. إبراهيم 🩺</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- محطات القصة -->
+        <section class="py-12 px-4 max-w-4xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-black text-center mb-16 text-white text-glow-max">
+                محطات في طريق حبنا
+            </h2>
+            <div class="space-y-12 relative before:absolute before:inset-0 before:right-1/2 before:-translate-x-px before:w-0.5 before:bg-purple-500">
+                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                    <div class="glass-card-deep p-7 rounded-2xl w-full md:w-[calc(50%-2rem)] glow-purple-strong border-purple-500">
+                        <span class="bg-purple-800 text-white px-3.5 py-1 rounded-full text-xs font-bold">6 أكتوبر 2024</span>
+                        <h3 class="text-2xl font-bold mt-3 mb-2 text-white text-glow-max">أول لقاء ونظرة</h3>
+                        <p class="text-purple-100 font-medium">اليوم الأول الذي التقت فيه عيوننا، والبداية لكل شيء جميل في حياتي.</p>
+                    </div>
+                </div>
+                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                    <div class="glass-card-deep p-7 rounded-2xl w-full md:w-[calc(50%-2rem)] glow-purple-strong border-purple-500">
+                        <span class="bg-purple-800 text-white px-3.5 py-1 rounded-full text-xs font-bold">7 أكتوبر 2024</span>
+                        <h3 class="text-2xl font-bold mt-3 mb-2 text-white text-glow-max">أول كلام وبداية الحديث</h3>
+                        <p class="text-purple-100 font-medium">أول مكالمة، ضحكات، وكلام دافئ بدأ ولم ينتهي حتى الآن.</p>
+                    </div>
+                </div>
+                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                    <div class="glass-card-deep p-7 rounded-2xl w-full md:w-[calc(50%-2rem)] glow-purple-strong border-purple-500">
+                        <span class="bg-purple-800 text-white px-3.5 py-1 rounded-full text-xs font-bold">17 أكتوبر 2024</span>
+                        <h3 class="text-2xl font-bold mt-3 mb-2 text-white text-glow-max">بداية قصتنا الرسمية ❤️</h3>
+                        <p class="text-purple-100 font-medium">اليوم الأغلى، يوم ما أعلنا أننا أصبحنا روحاً واحدة وبدأت رحلتنا معاً.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- صندوق الرسائل السرية -->
+        <section class="py-12 px-4 max-w-3xl mx-auto text-center">
+            <div class="glass-card-deep p-8 rounded-3xl glow-purple-strong border-purple-500">
+                <h3 class="text-2xl md:text-3xl font-black mb-4 text-white text-glow-max"><i class="fa-solid fa-envelope-open-text ml-2 text-fuchsia-400"></i> صندوق الرسائل السرية</h3>
+                <p id="secretMessage" class="text-white font-semibold text-lg md:text-xl min-h-[80px] flex items-center justify-center p-5 bg-purple-950/60 rounded-2xl border border-purple-600 mb-6 shadow-inner text-glow-max">
+                    اضغطي على الزر أدناه لتفتحي رسالة سرية خاصة جداً منكِ وإليكِ... ✨
+                </p>
+                <button onclick="showNextSecretMessage()" class="bg-gradient-to-r from-purple-600 to-fuchsia-600 hover:from-purple-500 hover:to-fuchsia-500 text-white font-bold py-3.5 px-8 rounded-2xl shadow-lg transition transform hover:scale-105 cursor-pointer text-base">
+                    افتحي رسالة جديدة 💌
+                </button>
+            </div>
+        </section>
+
+        <!-- ألبوم الذكريات -->
+        <section class="py-16 px-4 max-w-6xl mx-auto text-center bg-gradient-to-t from-purple-950/60 to-deep-purple rounded-t-[3rem]">
+            <h2 class="text-4xl md:text-5xl font-black mb-4 text-white text-glow-max">
+                ألبوم ذكرياتنا
+            </h2>
+            <p class="text-purple-200 mb-16 text-lg font-semibold">كل لحظة معكِ هي حكاية بحد ذاتها</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glass-card-deep p-5 rounded-3xl glow-purple-strong overflow-hidden group border-purple-500">
+                    <div class="overflow-hidden rounded-2xl h-72">
+                        <img src="childhood.jpg" alt="صورة الطفولة" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    </div>
+                    <div class="mt-5 text-right">
+                        <span class="text-xs bg-purple-800 text-white px-4 py-1.5 rounded-full font-bold">حكاية الطفولة</span>
+                        <h3 class="text-xl font-bold mt-3 text-white text-glow-max">لو كنا اتقابلنا واحنا صغار 🩺</h3>
+                    </div>
+                </div>
+                <div class="glass-card-deep p-5 rounded-3xl glow-purple-strong overflow-hidden group border-purple-500">
+                    <div class="overflow-hidden rounded-2xl h-72">
+                        <img src="hands.jpg" alt="أيدينا معاً" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    </div>
+                    <div class="mt-5 text-right">
+                        <span class="text-xs bg-purple-800 text-white px-4 py-1.5 rounded-full font-bold">سند وأمان</span>
+                        <h3 class="text-xl font-bold mt-3 text-white text-glow-max">إيد في إيد للأبد 🤝❤️</h3>
+                    </div>
+                </div>
+                <div class="glass-card-deep p-5 rounded-3xl glow-purple-strong overflow-hidden group border-purple-500">
+                    <div class="overflow-hidden rounded-2xl h-72">
+                        <img src="selfie1.jpg" alt="ذكرياتنا" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    </div>
+                    <div class="mt-5 text-right">
+                        <span class="text-xs bg-purple-800 text-white px-4 py-1.5 rounded-full font-bold">ضحكتنا معاً</span>
+                        <h3 class="text-xl font-bold mt-3 text-white text-glow-max">أحلى أيام عمري ✨</h3>
+                    </div>
+                </div>
+                <div class="glass-card-deep p-5 rounded-3xl glow-purple-strong overflow-hidden group border-purple-500">
+                    <div class="overflow-hidden rounded-2xl h-72">
+                        <img src="selfie2.jpg" alt="ذكرياتنا" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    </div>
+                    <div class="mt-5 text-right">
+                        <span class="text-xs bg-purple-800 text-white px-4 py-1.5 rounded-full font-bold">لحظات خاصة</span>
+                        <h3 class="text-xl font-bold mt-3 text-white text-glow-max">عيونك أجمل ما رايت 💜</h3>
+                    </div>
+                </div>
+                <div class="glass-card-deep p-5 rounded-3xl glow-purple-strong overflow-hidden group border-purple-500">
+                    <div class="overflow-hidden rounded-2xl h-72">
+                        <img src="selfie3.jpg" alt="ذكرياتنا" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    </div>
+                    <div class="mt-5 text-right">
+                        <span class="text-xs bg-purple-800 text-white px-4 py-1.5 rounded-full font-bold">معاً دائماً</span>
+                        <h3 class="text-xl font-bold mt-3 text-white text-glow-max">شريكة عمري ودكتورتي 🩺</h3>
+                    </div>
+                </div>
+                <div class="glass-card-deep p-5 rounded-3xl glow-purple-strong overflow-hidden group border-purple-500">
+                    <div class="overflow-hidden rounded-2xl h-72">
+                        <img src="selfie4.jpg" alt="ذكرياتنا" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    </div>
+                    <div class="mt-5 text-right">
+                        <span class="text-xs bg-purple-800 text-white px-4 py-1.5 rounded-full font-bold">قصة أبدية</span>
+                        <h3 class="text-xl font-bold mt-3 text-white text-glow-max">حبي الأبدي يا ساره ❤️</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم التسجيل الصوتي باسم أغنيتي المفضلة -->
+        <section class="py-12 px-4 max-w-xl mx-auto text-center">
+            <div class="glass-card-deep p-8 rounded-3xl glow-purple-strong border-purple-500">
+                <audio id="voiceRecord">
+                    <source src="voice.mp3" type="audio/mp3">
+                </audio>
+                <div class="w-16 h-16 rounded-full bg-purple-900/80 mx-auto flex items-center justify-center mb-4 border border-purple-400 glow-purple-strong">
+                    <i class="fa-solid fa-microphone-lines text-fuchsia-300 fa-2x"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white text-glow-max mb-2">أغنيتي المفضلة 🤎</h3>
+                <p class="text-xs text-purple-200 mb-6">اضغطي للاستماع للتسجيل الصوتي (يعمل منفرداً عند الضغط)</p>
+                <button onclick="toggleVoice()" id="voiceBtn" class="bg-gradient-to-r from-fuchsia-600 to-purple-600 hover:from-fuchsia-500 hover:to-purple-500 text-white font-bold py-3.5 px-8 rounded-2xl shadow-lg transition transform hover:scale-105 cursor-pointer text-sm flex items-center justify-center gap-3 mx-auto">
+                    <i id="voiceIcon" class="fa-solid fa-play"></i>
+                    <span id="voiceText">تشغيل أغنيتي المفضلة</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- الفوتر -->
+        <footer class="py-12 text-center border-t border-purple-800/80 bg-deep-purple text-purple-300 text-sm font-semibold">
+            <p>صُنع بكل الحب لـ دكتورة ساره 💜 بواسطة دكتور إبراهيم</p>
+        </footer>
+    </div>
+
+    <!-- جافاسكريبت -->
+    <script>
+        const correctPass = "6102024";
+        const loginGate = document.getElementById('loginGate');
+        const mainContent = document.getElementById('mainContent');
+        const passInput = document.getElementById('passInput');
+        const errorMsg = document.getElementById('errorMsg');
+        
+        const song = document.getElementById('loveSong');
+        const musicBtn = document.getElementById('musicBtn');
+        const musicIcon = document.getElementById('musicIcon');
+        const musicText = document.getElementById('musicText');
+        let isPlayingSong = false;
+
+        const voice = document.getElementById('voiceRecord');
+        const voiceBtn = document.getElementById('voiceBtn');
+        const voiceIcon = document.getElementById('voiceIcon');
+        const voiceText = document.getElementById('voiceText');
+        let isPlayingVoice = false;
+
+        window.onload = () => passInput.focus();
+
+        passInput.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") { checkPassword(); }
+        });
+
+        function togglePassVisibility() {
+            const eyeIcon = document.getElementById('eyeIcon');
+            if (passInput.type === "password") {
+                passInput.type = "text";
+                eyeIcon.className = "fa-solid fa-eye-slash";
+            } else {
+                passInput.type = "password";
+                eyeIcon.className = "fa-solid fa-eye";
+            }
+        }
+
+        function checkPassword() {
+            const enteredPass = passInput.value;
+            if (enteredPass === correctPass) {
+                loginGate.style.opacity = '0';
+                setTimeout(() => { loginGate.style.display = 'none'; }, 500);
+                mainContent.style.display = 'block';
+                playSongAutomatically();
+            } else {
+                errorMsg.style.opacity = '1';
+                passInput.value = "";
+                passInput.classList.add('border-red-400');
+                setTimeout(() => { passInput.classList.remove('border-red-400'); }, 500);
+            }
+        }
+
+        function playSongAutomatically() {
+            const playPromise = song.play();
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    updateMusicUI(true);
+                }).catch(error => {
+                    updateMusicUI(false);
+                });
+            }
+        }
+
+        function toggleMusic() {
+            if (isPlayingSong) {
+                song.pause();
+                updateMusicUI(false);
+            } else {
+                if (isPlayingVoice) {
+                    voice.pause();
+                    updateVoiceUI(false);
+                }
+                song.play();
+                updateMusicUI(true);
+            }
+        }
+
+        function updateMusicUI(playing) {
+            isPlayingSong = playing;
+            if (playing) {
+                musicIcon.className = "fa-solid fa-pause animate-spin";
+                musicText.innerText = "إيقاف الأغنية";
+            } else {
+                musicIcon.className = "fa-solid fa-music";
+                musicText.innerText = "شغل الأغنية 🎵";
+            }
+        }
+
+        function toggleVoice() {
+            if (isPlayingVoice) {
+                voice.pause();
+                updateVoiceUI(false);
+            } else {
+                if (isPlayingSong) {
+                    song.pause();
+                    updateMusicUI(false);
+                }
+                voice.play();
+                updateVoiceUI(true);
+            }
+        }
+
+        function updateVoiceUI(playing) {
+            isPlayingVoice = playing;
+            if (playing) {
+                voiceIcon.className = "fa-solid fa-pause animate-spin";
+                voiceText.innerText = "إيقاف أغنيتي المفضلة";
+            } else {
+                voiceIcon.className = "fa-solid fa-play";
+                voiceText.innerText = "تشغيل أغنيتي المفضلة";
+            }
+        }
+
+        voice.onended = function() {
+            updateVoiceUI(false);
+        };
+
+        const secretMessages = [
+            "أنتِ لستِ فقط شريكة حياتي وزميلة مهنتي، أنتِ النبض الذي يعيش في قلبي كل ثانية 💜",
+            "كل ابتسامة منكِ تنسيني تعب الدنيا كلها يا أجمل دكتورة أسنان في الكون ✨",
+            "مهما مر الوقت، ستظل 17 أكتوبر 2024 هي أعظم تاريخ عرفه عمري لأنكِ دخلتيه ❤️",
+            "بحبك، وبحب كل تفصيلة فيكي، وهفضل أعمل المستحيل عشان أشوف ضحكتك منورة دايماً 🩺"
+        ];
+        let currentMsgIndex = 0;
+        function showNextSecretMessage() {
+            const msgEl = document.getElementById('secretMessage');
+            msgEl.style.opacity = '0';
+            setTimeout(() => {
+                currentMsgIndex = (currentMsgIndex + 1) % secretMessages.length;
+                msgEl.innerText = secretMessages[currentMsgIndex];
+                msgEl.style.opacity = '1';
+            }, 200);
+        }
+
+        const startDate = new Date("2024-10-17T00:00:00");
+        function updateTimer() {
+            const now = new Date();
+            const diff = now - startDate;
+            document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('hours').innerText = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            document.getElementById('minutes').innerText = Math.floor((diff / 1000 / 60) % 60);
+            document.getElementById('seconds').innerText = Math.floor((diff / 1000) % 60);
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+    </script>
+</body>
+</html>
